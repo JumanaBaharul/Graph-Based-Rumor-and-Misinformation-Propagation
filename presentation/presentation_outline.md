@@ -16,7 +16,7 @@
 - Public demand for rapid, explainable rumor detection in crisis scenarios.
 
 ## Slide 4 – Proposed Methodology
-1. Curate conversation graphs from verified & rumor events (sampled from PHEME-like narratives).
+1. Curate conversation graphs from verified & rumor events (sampled from PHEME, Twitter15, Twitter16-style narratives).
 2. Engineer hybrid node features:
    - TF-IDF textual embeddings
    - Structural signals (degree, betweenness)
@@ -32,7 +32,7 @@
 - Mention PyTorch-based implementation.
 
 ## Slide 6 – Experimental Setup
-- Dataset: 6 curated conversation graphs (3 rumor, 3 verified).
+- Dataset: 10 curated conversation graphs (balanced rumor vs verified) spanning PHEME, Twitter15, and Twitter16 cases.
 - Training: 3-fold stratified CV, 60 epochs, Adam optimizer.
 - Evaluation metrics: Accuracy, Precision/Recall/F1 per class.
 - Hardware: CPU-friendly (runs in under a minute).
@@ -52,9 +52,9 @@
 - Novelty reiterated: temporal influence module + explainable node ranking.
 
 ## Slide 10 – Future Scope
-- Scale to larger datasets (Twitter15/16, Weibo) & multilingual embeddings.
-- Integrate transformer-based text encoders (e.g., BERT) for richer semantics.
-- Deploy as dashboard/API for newsroom or public policy stakeholders.
+- Fine-tune transformer-based text encoders (e.g., BERT) for richer semantics.
+- Expand to full benchmark splits (PHEME, Twitter15/16, Weibo) and multilingual settings.
+- Containerise the Streamlit dashboard or expose a REST API for newsroom/policy stakeholders.
 
 ## Slide 11 – Live Demo Checklist
 - Launch VS Code environment.

@@ -22,9 +22,14 @@ Follow these steps to deliver a smooth live demonstration of the Temporal Influe
 3. Highlight how rumor vs verified graphs differ in narrative tone and reply patterns.
 
 ## 3. Run Cross-Validated Training
-1. Create a new terminal tab and execute:
+1. Create a new terminal tab and execute (choose your preferred architecture):
    ```bash
+   # Temporal GCN baseline
    python -m src.train --epochs 60 --batch-size 2 --save-model artifacts/tir_gcn.pt
+
+   # Temporal GAT variant (optional)
+   python -m src.train --architecture temporal_gat --heads 4 \
+     --epochs 60 --batch-size 2 --save-model artifacts/tir_gat.pt
    ```
 2. Narrate the console output:
    - Fold-wise loss progression.
@@ -51,7 +56,7 @@ Follow these steps to deliver a smooth live demonstration of the Temporal Influe
      "edges": [[0,1],[0,2],[1,2]]
    }
    ```
-2. Run inference on a built-in sample:
+2. Run inference on a built-in sample (architecture auto-detected from the checkpoint):
    ```bash
    python -m src.infer \
      --model artifacts/tir_gcn.pt \
@@ -70,6 +75,13 @@ Follow these steps to deliver a smooth live demonstration of the Temporal Influe
      --data data/sample_graphs.json \
      --graph-json live_demo.json
    ```
+
+5. Showcase the Streamlit dashboard (bonus):
+   ```bash
+   streamlit run app/streamlit_app.py
+   ```
+   - Point the sidebar inputs to the exported checkpoint/vectorizer.
+   - Switch between dataset samples, uploaded JSON, or manual entry to highlight interactivity.
 
 ## 6. Visualise a Graph (Optional Bonus)
 1. Create a quick plotting script or open a Jupyter notebook:

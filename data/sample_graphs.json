@@ -73,5 +73,55 @@
       {"id": 3, "user": "alumni_office", "text": "We are thrilled to support the next generation of leaders through these scholarships.", "timestamp": "2021-09-01T12:30:00Z"}
     ],
     "edges": [[0,1],[0,2],[1,3],[2,3]]
+  },
+  {
+    "id": "twitter15_001",
+    "label": 1,
+    "description": "Twitter15-style rumor about a collapsed bridge with conflicting eyewitness accounts.",
+    "nodes": [
+      {"id": 0, "user": "breaking_news_bot", "text": "Horrific scene in downtown - Main Street bridge collapsed with cars in the river!", "timestamp": "2015-07-04T18:00:00Z"},
+      {"id": 1, "user": "commuter_dave", "text": "Traffic is stopped but the bridge is still standing. Lots of police though.", "timestamp": "2015-07-04T18:02:00Z"},
+      {"id": 2, "user": "live_cam", "text": "City traffic cam still shows cars moving across the bridge, no collapse spotted.", "timestamp": "2015-07-04T18:04:00Z"},
+      {"id": 3, "user": "panic_family", "text": "My sister drives there daily. Someone confirm if she's okay!", "timestamp": "2015-07-04T18:05:00Z"},
+      {"id": 4, "user": "city_ops", "text": "Update: Structural inspection happening due to debris reports. Bridge remains open with caution.", "timestamp": "2015-07-04T18:15:00Z"}
+    ],
+    "edges": [[0,1],[0,3],[1,2],[2,4],[3,4]]
+  },
+  {
+    "id": "twitter15_002",
+    "label": 0,
+    "description": "Twitter15 verified thread about a sports team victory with corroboration from reporters.",
+    "nodes": [
+      {"id": 0, "user": "sports_league", "text": "Final whistle: City FC wins 3-1 to reach the cup final!", "timestamp": "2015-09-12T20:50:00Z"},
+      {"id": 1, "user": "stadium_reporter", "text": "Interviewing the captain now - he confirms they're headed to Wembley.", "timestamp": "2015-09-12T20:52:00Z"},
+      {"id": 2, "user": "fan_club", "text": "Celebrations underway outside the stadium. What a night!", "timestamp": "2015-09-12T20:55:00Z"},
+      {"id": 3, "user": "stats_account", "text": "Match facts: City FC had 62% possession and 8 shots on target tonight.", "timestamp": "2015-09-12T20:58:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[0,3],[1,2],[2,3]]
+  },
+  {
+    "id": "twitter16_001",
+    "label": 1,
+    "description": "Twitter16 rumor alleging contaminated water supply with amplification by bots.",
+    "nodes": [
+      {"id": 0, "user": "anonymous_tip", "text": "City tap water tests positive for industrial waste - do NOT drink it!", "timestamp": "2016-03-20T06:00:00Z"},
+      {"id": 1, "user": "concerned_parent", "text": "Is this true? Kids complained about strange taste this morning.", "timestamp": "2016-03-20T06:05:00Z"},
+      {"id": 2, "user": "bot_01", "text": "Hospitals filling up due to poison water. Share this urgent warning!", "timestamp": "2016-03-20T06:06:00Z"},
+      {"id": 3, "user": "water_authority", "text": "We are aware of the circulating rumor. Tests at 5AM show water quality within standards.", "timestamp": "2016-03-20T06:15:00Z"},
+      {"id": 4, "user": "bot_02", "text": "Multiple neighborhoods without clean water - government covering it up.", "timestamp": "2016-03-20T06:18:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[0,4],[1,3],[2,3],[3,4]]
+  },
+  {
+    "id": "twitter16_002",
+    "label": 0,
+    "description": "Twitter16 verified thread about a science award announcement cross-posted by institutions.",
+    "nodes": [
+      {"id": 0, "user": "science_org", "text": "Congrats to Dr. Lee for receiving the 2016 Innovation in Robotics award!", "timestamp": "2016-11-02T15:00:00Z"},
+      {"id": 1, "user": "research_lab", "text": "Proud to collaborate with Dr. Lee. Here's the official press release.", "timestamp": "2016-11-02T15:05:00Z"},
+      {"id": 2, "user": "tech_mag", "text": "Confirmed: Dr. Lee's autonomous drone paper just earned the Innovation in Robotics award.", "timestamp": "2016-11-02T15:12:00Z"},
+      {"id": 3, "user": "grad_student", "text": "So excited for my advisor! Streaming the award ceremony now.", "timestamp": "2016-11-02T15:15:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[0,3],[1,2],[2,3]]
   }
 ]

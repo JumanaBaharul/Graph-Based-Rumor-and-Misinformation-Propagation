@@ -13,11 +13,11 @@ from torch import nn
 from torch.utils.data import DataLoader, Subset
 
 from .data import RumorGraphDataset, collate_graphs
-from .model import RumorGCN
+from .model import build_rumor_model
 
 
 def train_one_epoch(
-    model: RumorGCN,
+    model: nn.Module,
     dataloader: DataLoader,
     optimizer: torch.optim.Optimizer,
     criterion: nn.Module,
@@ -41,7 +41,7 @@ def train_one_epoch(
 
 
 def evaluate(
-    model: RumorGCN, dataloader: DataLoader, device: torch.device
+    model: nn.Module, dataloader: DataLoader, device: torch.device
 ) -> Dict[str, float]:
     model.eval()
     y_true: List[int] = []
@@ -85,6 +85,10 @@ def run_training(
     weight_decay: float = 1e-4,
     device: str | torch.device = "cpu",
     save_model_path: Path | None = None,
+    architecture: str = "temporal_gcn",
+    hidden_dim: int = 64,
+    dropout: float = 0.25,
+    heads: int = 4,
 ) -> None:
     device = torch.device(device)
     dataset = RumorGraphDataset(data_path)
@@ -113,11 +117,13 @@ def run_training(
             collate_fn=collate_graphs,
         )
 
-        model = RumorGCN(
+        model = build_rumor_model(
+            architecture,
             in_features=input_dim,
-            hidden_dim=64,
+            hidden_dim=hidden_dim,
             temporal_feature_index=input_dim - 1,
-            dropout=0.25,
+            dropout=dropout,
+            heads=heads,
         ).to(device)
 
         optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
@@ -157,11 +163,13 @@ def run_training(
             shuffle=True,
             collate_fn=collate_graphs,
         )
-        model = RumorGCN(
+        model = build_rumor_model(
+            architecture,
             in_features=input_dim,
-            hidden_dim=64,
+            hidden_dim=hidden_dim,
             temporal_feature_index=input_dim - 1,
-            dropout=0.25,
+            dropout=dropout,
+            heads=heads,
         ).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
         criterion = nn.BCEWithLogitsLoss()
@@ -177,10 +185,12 @@ def run_training(
                 "model_state_dict": model.state_dict(),
                 "input_dim": input_dim,
                 "config": {
-                    "hidden_dim": 64,
-                    "dropout": 0.25,
-                    "lr": lr,
-                    "epochs": epochs,
+                "hidden_dim": hidden_dim,
+                "dropout": dropout,
+                "lr": lr,
+                "epochs": epochs,
+                "architecture": architecture,
+                "heads": heads,
                 },
             },
             save_model_path,
@@ -201,6 +211,16 @@ if __name__ == "__main__":
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--device", type=str, default="cpu")
     parser.add_argument("--save-model", type=Path, default=None)
+    parser.add_argument(
+        "--architecture",
+        type=str,
+        default="temporal_gcn",
+        choices=["temporal_gcn", "temporal_gat", "hierarchical_pool"],
+        help="Backbone architecture to train",
+    )
+    parser.add_argument("--hidden-dim", type=int, default=64)
+    parser.add_argument("--dropout", type=float, default=0.25)
+    parser.add_argument("--heads", type=int, default=4)
     args = parser.parse_args()
 
     run_training(
@@ -211,4 +231,8 @@ if __name__ == "__main__":
         weight_decay=args.weight_decay,
         device=args.device,
         save_model_path=args.save_model,
+        architecture=args.architecture,
+        hidden_dim=args.hidden_dim,
+        dropout=args.dropout,
+        heads=args.heads,
     )

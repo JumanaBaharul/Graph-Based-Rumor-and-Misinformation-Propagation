@@ -9,7 +9,7 @@ import joblib
 import torch
 
 from .data import RumorGraphDataset
-from .model import RumorGCN
+from .model import build_rumor_model
 
 
 def load_graph(path: Path) -> dict:
@@ -35,17 +35,21 @@ def run_inference(
     device: str = "cpu",
 ) -> None:
     dataset = RumorGraphDataset(data_path)
-    dataset.vectorizer = joblib.load(vectorizer_path)
+    vectorizer = joblib.load(vectorizer_path)
+    dataset.rebuild_with_vectorizer(vectorizer)
 
     checkpoint = torch.load(model_path, map_location=device)
     config = checkpoint["config"]
     input_dim = checkpoint["input_dim"]
 
-    model = RumorGCN(
+    architecture = config.get("architecture", "temporal_gcn")
+    model = build_rumor_model(
+        architecture,
         in_features=input_dim,
-        hidden_dim=config["hidden_dim"],
+        hidden_dim=config.get("hidden_dim", 64),
         temporal_feature_index=input_dim - 1,
-        dropout=config["dropout"],
+        dropout=config.get("dropout", 0.3),
+        heads=config.get("heads", 4),
     )
     model.load_state_dict(checkpoint["model_state_dict"])
     model.to(device)
