@@ -1,0 +1,77 @@
+[
+  {
+    "id": "pheme_001",
+    "label": 1,
+    "description": "Rumor about emergency evacuation spreading quickly with emotionally charged replies.",
+    "nodes": [
+      {"id": 0, "user": "source_account", "text": "BREAKING: City center evacuated due to bomb threat! Stay away!", "timestamp": "2020-01-01T10:00:00Z"},
+      {"id": 1, "user": "local_journalist", "text": "Anyone able to confirm reports about an evacuation downtown?", "timestamp": "2020-01-01T10:03:00Z"},
+      {"id": 2, "user": "resident_1", "text": "I was just there, police are moving people but no mention of bombs.", "timestamp": "2020-01-01T10:05:00Z"},
+      {"id": 3, "user": "panic_user", "text": "My cousin says there were multiple devices found. This is serious!", "timestamp": "2020-01-01T10:06:00Z"},
+      {"id": 4, "user": "official_account", "text": "Official update: there is no bomb threat. Fire alarm triggered evacuation only.", "timestamp": "2020-01-01T10:10:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[1,3],[2,4],[3,4]]
+  },
+  {
+    "id": "pheme_002",
+    "label": 0,
+    "description": "Verified information about a charity event with corroborating replies.",
+    "nodes": [
+      {"id": 0, "user": "ngo", "text": "We have raised $200k for the river clean-up campaign. Thanks to all volunteers!", "timestamp": "2020-03-15T09:00:00Z"},
+      {"id": 1, "user": "volunteer_anna", "text": "Proud to be part of this. Photos from today's clean-up attached.", "timestamp": "2020-03-15T09:10:00Z"},
+      {"id": 2, "user": "local_media", "text": "Confirmed: The river clean-up campaign surpassed its funding goal this morning.", "timestamp": "2020-03-15T09:25:00Z"},
+      {"id": 3, "user": "citizen_mike", "text": "Great job everyone! Let's keep the momentum going.", "timestamp": "2020-03-15T09:30:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[1,3],[2,3]]
+  },
+  {
+    "id": "pheme_003",
+    "label": 1,
+    "description": "Rumor claiming celebrity death with conflicting eyewitnesses.",
+    "nodes": [
+      {"id": 0, "user": "gossip_blog", "text": "Hearing that actor John Smith found dead in hotel room. Sources say overdose.", "timestamp": "2021-05-20T22:00:00Z"},
+      {"id": 1, "user": "fan_account", "text": "No! Can't believe John Smith is gone...", "timestamp": "2021-05-20T22:02:00Z"},
+      {"id": 2, "user": "newsroom", "text": "We're reaching out to reps for comment. No official confirmation yet.", "timestamp": "2021-05-20T22:05:00Z"},
+      {"id": 3, "user": "eyewitness", "text": "I saw him at the premiere tonight looking fine. This can't be true.", "timestamp": "2021-05-20T22:07:00Z"},
+      {"id": 4, "user": "official_agent", "text": "Statement: John Smith is alive and well. Rumors are completely false.", "timestamp": "2021-05-20T22:30:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[1,3],[2,4],[3,4]]
+  },
+  {
+    "id": "pheme_004",
+    "label": 0,
+    "description": "Verified emergency alert with consistent updates.",
+    "nodes": [
+      {"id": 0, "user": "weather_service", "text": "Severe thunderstorm warning for the county until 5pm. Seek shelter immediately.", "timestamp": "2021-06-10T14:00:00Z"},
+      {"id": 1, "user": "news_station", "text": "Live coverage now: Severe storm entering the city limits. Radar confirms hail.", "timestamp": "2021-06-10T14:05:00Z"},
+      {"id": 2, "user": "resident_alex", "text": "Hearing sirens downtown. Everyone stay safe!", "timestamp": "2021-06-10T14:07:00Z"},
+      {"id": 3, "user": "emergency_mgmt", "text": "Shelters open at community centers. Updates every 15 minutes.", "timestamp": "2021-06-10T14:10:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[1,3],[2,3]]
+  },
+  {
+    "id": "pheme_005",
+    "label": 1,
+    "description": "Rumor about vaccine side effects amplified by coordinated accounts.",
+    "nodes": [
+      {"id": 0, "user": "anti_vax_forum", "text": "New vaccine batch causing paralysis in 30% of recipients! Doctors hiding data.", "timestamp": "2021-08-01T08:00:00Z"},
+      {"id": 1, "user": "bot_account_1", "text": "Friend's sister can't move after shot. Share this now!", "timestamp": "2021-08-01T08:02:00Z"},
+      {"id": 2, "user": "health_researcher", "text": "No evidence supporting claims of mass paralysis. Clinical data shows mild side effects only.", "timestamp": "2021-08-01T08:10:00Z"},
+      {"id": 3, "user": "bot_account_2", "text": "Hospitals overflowing with vaccine injuries. Officials silent.", "timestamp": "2021-08-01T08:11:00Z"},
+      {"id": 4, "user": "public_health", "text": "Fact check: There are zero paralysis reports linked to this vaccine batch. Please stop spreading misinformation.", "timestamp": "2021-08-01T08:20:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[0,3],[1,3],[2,4],[3,4]]
+  },
+  {
+    "id": "pheme_006",
+    "label": 0,
+    "description": "Verified announcement about university scholarship winners.",
+    "nodes": [
+      {"id": 0, "user": "university_pr", "text": "Congratulations to the 50 scholarship recipients announced today. Details on our website.", "timestamp": "2021-09-01T12:00:00Z"},
+      {"id": 1, "user": "student_leader", "text": "Here's the link to the official scholarship list released this morning.", "timestamp": "2021-09-01T12:05:00Z"},
+      {"id": 2, "user": "parent_group", "text": "Proud of all the students! Sharing photos from the ceremony.", "timestamp": "2021-09-01T12:20:00Z"},
+      {"id": 3, "user": "alumni_office", "text": "We are thrilled to support the next generation of leaders through these scholarships.", "timestamp": "2021-09-01T12:30:00Z"}
+    ],
+    "edges": [[0,1],[0,2],[1,3],[2,3]]
+  }
+]
