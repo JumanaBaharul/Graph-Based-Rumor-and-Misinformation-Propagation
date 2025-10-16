@@ -26,7 +26,7 @@ def load_artifacts(
 
     dataset = RumorGraphDataset(data_path)
     vectorizer = joblib.load(vectorizer_path)
-    dataset.vectorizer = vectorizer
+    dataset.rebuild_with_vectorizer(vectorizer)
 
     checkpoint = torch.load(model_path, map_location="cpu")
     config = checkpoint.get("config", {})
@@ -113,9 +113,9 @@ st.write(
 
 with st.sidebar:
     st.header("Artifacts")
-    default_model = "artifacts/rumor_gcn.pt"
+    default_model = "artifacts/tir_gcn.pt"
     model_path = st.text_input("Model checkpoint", value=default_model)
-    vectorizer_path = st.text_input("Vectorizer pickle", value="artifacts/rumor_gcn.vectorizer.pkl")
+    vectorizer_path = st.text_input("Vectorizer pickle", value="artifacts/tir_gcn.vectorizer.pkl")
     data_path = st.text_input("Dataset", value="data/sample_graphs.json")
 
     artifacts_loaded = False

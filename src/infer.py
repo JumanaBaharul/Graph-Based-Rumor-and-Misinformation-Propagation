@@ -35,7 +35,8 @@ def run_inference(
     device: str = "cpu",
 ) -> None:
     dataset = RumorGraphDataset(data_path)
-    dataset.vectorizer = joblib.load(vectorizer_path)
+    vectorizer = joblib.load(vectorizer_path)
+    dataset.rebuild_with_vectorizer(vectorizer)
 
     checkpoint = torch.load(model_path, map_location=device)
     config = checkpoint["config"]

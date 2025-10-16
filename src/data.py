@@ -27,23 +27,38 @@ class RumorGraphDataset(torch.utils.data.Dataset):
 
     def __init__(self, json_path: str | Path, max_features: int = 100) -> None:
         self.path = Path(json_path)
-        raw_graphs = self._load_graphs(self.path)
+        self.max_features = max_features
+        self.raw_graphs = self._load_graphs(self.path)
         self.vectorizer: TfidfVectorizer | None = None
-        self.samples: List[GraphSample] = self._vectorize_graphs(raw_graphs, max_features)
+        self.samples: List[GraphSample] = self._vectorize_graphs(
+            self.raw_graphs, max_features=max_features
+        )
 
     @staticmethod
     def _load_graphs(path: Path) -> List[Dict]:
         with path.open("r", encoding="utf-8") as f:
             return json.load(f)
 
-    def _vectorize_graphs(self, graphs: List[Dict], max_features: int) -> List[GraphSample]:
+    def _vectorize_graphs(
+        self,
+        graphs: List[Dict],
+        *,
+        max_features: int,
+        vectorizer: TfidfVectorizer | None = None,
+    ) -> List[GraphSample]:
+        """Vectorises graphs either by fitting or reusing a TF-IDF vectorizer."""
+
         # Gather all node texts for TF-IDF vocabulary learning
         all_texts: List[str] = []
         for graph in graphs:
             all_texts.extend(node["text"] for node in graph["nodes"])
 
-        vectorizer = TfidfVectorizer(max_features=max_features, ngram_range=(1, 2))
-        text_features = vectorizer.fit_transform(all_texts).toarray().astype(np.float32)
+        if vectorizer is None:
+            vectorizer = TfidfVectorizer(max_features=max_features, ngram_range=(1, 2))
+            text_features = vectorizer.fit_transform(all_texts).toarray().astype(np.float32)
+        else:
+            text_features = vectorizer.transform(all_texts).toarray().astype(np.float32)
+
         self.vectorizer = vectorizer
 
         samples: List[GraphSample] = []
@@ -144,6 +159,13 @@ class RumorGraphDataset(torch.utils.data.Dataset):
             label=torch.tensor([graph.get("label", -1)], dtype=torch.float32),
             node_metadata=nodes,
             graph_id=graph.get("id", "inference_graph"),
+        )
+
+    def rebuild_with_vectorizer(self, vectorizer: TfidfVectorizer) -> None:
+        """Re-encodes stored graphs to align with an externally provided vectorizer."""
+
+        self.samples = self._vectorize_graphs(
+            self.raw_graphs, max_features=self.max_features, vectorizer=vectorizer
         )
 
 
