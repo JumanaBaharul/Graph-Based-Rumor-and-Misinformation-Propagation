@@ -31,20 +31,25 @@ The baseline approach introduces **Temporal Influence Re-weighted GCN (TIR-GCN)*
 └── README.md
 ```
 
-## Getting Started
+## Getting Started (VS Code Workflow)
 
-1. **Create and activate a virtual environment (recommended).**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
-   ```
+1. **Open the project folder in VS Code.** Use *File → Open Folder…* and point to the repository root. When prompted, trust the authors and allow the workspace to use the recommended settings.
 
-2. **Install dependencies.**
+2. **Create and select a virtual environment from the VS Code terminal.**
+   - Launch the integrated terminal (*Terminal → New Terminal*). It opens in the project root by default.
+   - Create the environment and activate it in the terminal:
+     ```bash
+     python -m venv .venv
+     source .venv/bin/activate  # Windows PowerShell: .venv\\Scripts\\Activate.ps1
+     ```
+   - Once activated, press `Ctrl+Shift+P`, run **Python: Select Interpreter**, and choose the `.venv` interpreter so that VS Code uses the same environment for running and debugging.
+
+3. **Install dependencies.**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run cross-validated training and export a deployable model.** Choose an architecture:
+4. **Run cross-validated training and export a deployable model from the integrated terminal.** Choose an architecture:
 
    - Temporal GCN (default):
      ```bash
@@ -65,7 +70,7 @@ The baseline approach introduces **Temporal Influence Re-weighted GCN (TIR-GCN)*
 
    Each command prints fold-level metrics, summarizes accuracy/precision/recall, retrains on the full dataset, and saves both the model weights and the fitted TF-IDF vectorizer (e.g., `artifacts/tir_gcn.vectorizer.pkl`).
 
-4. **Run inference on any conversation graph.**
+5. **Run inference on any conversation graph.**
    ```bash
    python -m src.infer \
      --model artifacts/tir_gcn.pt \
@@ -76,13 +81,13 @@ The baseline approach introduces **Temporal Influence Re-weighted GCN (TIR-GCN)*
 
    To classify a custom conversation stored in `my_graph.json`, replace `--graph-id` with `--graph-json my_graph.json`.
 
-5. **Launch the interactive dashboard (optional).** After training, you can showcase predictions live:
+6. **Launch the Streamlit dashboard directly from VS Code for your demo.** Keep the virtual environment active in the integrated terminal and run:
 
    ```bash
    streamlit run app/streamlit_app.py
    ```
 
-   Use the sidebar to point to the exported checkpoint/vectorizer and explore predictions on curated samples, uploaded JSON graphs, or manually entered cascades.
+   Streamlit prints a local URL (typically `http://localhost:8501`). Hold `Ctrl` (or `Cmd` on macOS) and click the link in the terminal to open it in your browser. Use the sidebar to load the exported checkpoint/vectorizer and explore curated samples, uploaded JSON graphs, or manually entered cascades during the presentation.
 
 ## Key Ideas to Present
 
